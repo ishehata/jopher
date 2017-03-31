@@ -40,7 +40,7 @@ The main function Jopher uses to send responses is Write(), you can use it for a
 but alongside it, Jopher provides two other types of methods, error responses, and success responses.
 
 
-####### Write
+###### Write
 
 ```go
 func fooHandler(w http.ResponseWriter, r *http.Request) {
@@ -52,7 +52,7 @@ func fooHandler(w http.ResponseWriter, r *http.Request) {
 }
 ```
 
-####### Success
+###### Success
 
 Success() returns a 200 response with the supplied message as the body of the response
 
@@ -64,7 +64,7 @@ func fooHandler(w http.ResponseWriter, r *http.Request) {
 }
 ```
 
-####### Created
+###### Created
 
 Success() returns a 201 response with the supplied message as the body of the response
 
@@ -82,7 +82,7 @@ func fooHandler(w http.ResponseWriter, r *http.Request) {
 }
 ```
 
-####### Error
+###### Error
 
 Error() returns an error response with the supplied message as the body of the response
 and the a status code.
@@ -103,7 +103,7 @@ func fooHandler(w http.ResponseWriter, r *http.Request) {
 }
 ```
 
-####### BadRequest
+###### BadRequest
 
 BadRequest() uses Error() to returns an error response with the supplied message as the body of the response
 and a status code of 400.
@@ -123,7 +123,7 @@ func fooHandler(w http.ResponseWriter, r *http.Request) {
 }
 ```
 
-####### Unauthorized
+###### Unauthorized
 
 Unauthorized() uses Error() to returns an error response with the supplied message as the body of the response
 and a status code of 401.
@@ -144,7 +144,7 @@ func fooHandler(w http.ResponseWriter, r *http.Request) {
 }
 ```
 
-####### NotFound
+###### NotFound
 
 NotFound() uses Error() to returns an error response with the supplied message as the body of the response
 and a status code of 404.
@@ -165,28 +165,7 @@ func fooHandler(w http.ResponseWriter, r *http.Request) {
 }
 ```
 
-####### NotFound
-
-NotFound() uses Error() to returns an error response with the supplied message as the body of the response
-and a status code of 404.
-
-```go
-func fooHandler(w http.ResponseWriter, r *http.Request) {
-    type user struct {
-        Email string
-        Password string
-    }
-
-    // e.g: trying to find user in db
-    c, _ := db.Count("users", &user{"foo@bar.com"})
-    if c < 1 {
-        jopher.NotFound(w, errors.New("User was not found"))
-    }
-    ...
-}
-```
-
-####### InternalServerError
+###### InternalServerError
 
 InternalServerError() uses Error() to returns an error response with the supplied message as the body of the response
 and a status code of 500.
