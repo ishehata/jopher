@@ -18,7 +18,7 @@ func Write(w http.ResponseWriter, status int, msg interface{}) {
 	} else {
 		res["data"] = msg
 	}
-	w.Header().Set("Content-Type", "application/json")
+	w.Header().Set("Content-Type", "application/json; charset=utf-8")
 	w.WriteHeader(status)
 	enc, err := json.Marshal(res)
 	if err != nil {
