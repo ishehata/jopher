@@ -6,21 +6,12 @@ import (
 	"net/http"
 )
 
-type response map[string]interface{}
-
 // Write transforms the passed message to a json object,
 // then sends response with the status code passed
 func Write(w http.ResponseWriter, status int, msg interface{}) {
-	res := response{}
-	res["status"] = status
-	if status >= 300 {
-		res["error"] = msg.(error).Error()
-	} else {
-		res["data"] = msg
-	}
 	w.Header().Set("Content-Type", "application/json; charset=utf-8")
 	w.WriteHeader(status)
-	enc, err := json.Marshal(res)
+	enc, err := json.Marshal(msg)
 	if err != nil {
 		InternalServerError(w, errors.New("Failed to encode response body to json"))
 	}

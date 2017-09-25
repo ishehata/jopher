@@ -32,3 +32,20 @@ func MethodNotAllowed(w http.ResponseWriter, err error) {
 func InternalServerError(w http.ResponseWriter, err error) {
 	Error(w, http.StatusInternalServerError, err)
 }
+
+// HandleError checks if the passed err is not nil,
+// if it is: it will write InternalServerError to ResponseWriter
+func HandleError(w http.ResponseWriter, err error) {
+	if err != nil {
+		InternalServerError(w, err)
+	}
+}
+
+// HandleErrorWithStatus checks if the passed err is not nil,
+// if it is: it will write the passed status code with error message to ResponseWriter
+func HandleErrorWithStatus(w http.ResponseWriter, status int, err error) {
+	if err != nil {
+		Error(w, status, err)
+		return
+	}
+}
