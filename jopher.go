@@ -6,16 +6,20 @@ import (
 	"net/http"
 )
 
+// M is a type of map[string]interface{}
+type M map[string]interface{}
+
 // Write transforms the passed message to a json object,
 // then sends response with the status code passed
 func Write(w http.ResponseWriter, status int, msg interface{}) {
 	w.Header().Set("Content-Type", "application/json; charset=utf-8")
 	w.WriteHeader(status)
-	enc, err := json.Marshal(msg)
+	err := json.NewEncoder(w).Encode(msg)
+	// enc, err := json.Marshal(msg)
 	if err != nil {
 		InternalServerError(w, errors.New("Failed to encode response body to json"))
 	}
-	w.Write([]byte(enc))
+	//w.Write([]byte(enc))
 }
 
 // Success return a 200 response with the passed message as the body of the response

@@ -4,8 +4,8 @@ import "net/http"
 
 // Error sends a json error message
 func Error(w http.ResponseWriter, status int, err error) {
-	w.Header().Set("Content-Type", "application/json")
-	Write(w, status, err)
+	m := M{"error": err.Error()}
+	Write(w, status, m)
 }
 
 // BadRequest return 400 response
